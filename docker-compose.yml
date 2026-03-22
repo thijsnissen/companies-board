@@ -1,0 +1,60 @@
+name: companies-board
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - ./docker/pgsql:/docker-entrypoint-initdb.d
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+    ports:
+      - "5432:5432"
+
+  mailpit:
+    image: axllent/mailpit
+    restart: unless-stopped
+    volumes:
+      - ./docker/mailpit:/data
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    environment:
+      MP_DATABASE: /data/tmp/mailpit.db
+      MP_SMTP_AUTH_FILE: /data/smtp-auth-file
+      MP_SMTP_TLS_CERT: /data/cert.pem
+      MP_SMTP_TLS_KEY: /data/key.pem
+      MP_SMTP_REQUIRE_STARTTLS: true
+
+  stripe-cli:
+    image: stripe/stripe-cli
+    restart: unless-stopped
+    environment:
+      STRIPE_API_KEY: ${PAYMENT_PROVIDER_STRIPE_API_KEY}
+      STRIPE_DEVICE_NAME: docker
+    command: listen --forward-to http://host.docker.internal:${HTTP_PORT}/api/webhooks/stripe
+
+  ollama:
+    image: ollama/ollama
+    restart: unless-stopped
+    volumes:
+      - ./docker/ollama/tmp:/root/.ollama
+    ports:
+      - "11434:11434"
+    environment:
+      OLLAMA_KEEP_ALIVE: -1
+
+  ollama-init:
+    image: curlimages/curl:latest
+    depends_on:
+      - ollama
+    volumes:
+      - ./docker/ollama/preload_model.sh:/preload_model.sh
+    command: /preload_model.sh ollama 11434 ${LLM_CLIENT_OLLAMA_HTTP_MODEL}
+
+  azurite:
+    image: mcr.microsoft.com/azure-storage/azurite
+    volumes:
+      - ./docker/azurite/tmp:/data
+    ports:
+      - "10000:10000"
