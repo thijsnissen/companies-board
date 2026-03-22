@@ -53,7 +53,7 @@ lazy val libAuth =
   project
     .in(file("code/libs/auth"))
     .settings(Settings.common)
-    .settings(libraryDependencies ++= Dependencies.libAuth)
+    .settings(libraryDependencies ++= Dependencies.libAuth ++ Dependencies.test)
 
 lazy val libDb =
   project
