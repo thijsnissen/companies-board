@@ -72,7 +72,7 @@ lazy val libEmail =
   project
     .in(file("code/libs/email"))
     .settings(Settings.common)
-    .settings(libraryDependencies ++= Dependencies.libEmail)
+    .settings(libraryDependencies ++= Dependencies.libEmail ++ Dependencies.test)
 
 lazy val libHttp =
   project
