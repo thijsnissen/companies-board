@@ -14,7 +14,15 @@ lazy val root =
       description    := "Adapted from ZIO Rite of Passage by Rock the JVM."
     )
     .settings(Aliases.common)
-    .aggregate(application, integration)
+    .aggregate(
+      foundations,
+      application,
+      integration,
+      libAuth,
+      libDb,
+      libEmail,
+      libHttp
+    )
 
 lazy val foundations =
   project
@@ -27,8 +35,7 @@ lazy val application =
     .in(file("code/application"))
     .enablePlugins(JibPlugin)
     .settings(Settings.common)
-    .settings(libraryDependencies ++=
-      Dependencies.application ++ Dependencies.test)
+    .settings(libraryDependencies ++= Dependencies.application ++ Dependencies.test)
     .dependsOn(server)
 
 lazy val server: Project =
@@ -59,7 +66,7 @@ lazy val libDb =
   project
     .in(file("code/libs/db"))
     .settings(Settings.common)
-    .settings(libraryDependencies ++= Dependencies.libDb)
+    .settings(libraryDependencies ++= Dependencies.libDb ++ Dependencies.test)
 
 lazy val libEmail =
   project

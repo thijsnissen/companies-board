@@ -86,4 +86,4 @@ object AuthenticationSpec extends ZIOSpecDefault:
 
 object AuthenticationSpecTestData:
   def randomString(length: Int = 10): String = Random.alphanumeric.take(length).mkString
-  def randomUuid(): UUID = UUID.randomUUID()
+  def randomUuid(): UUID                     = UUID.randomUUID()

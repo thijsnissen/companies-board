@@ -3,7 +3,7 @@ package nl.thijsnissen.auth
 import com.auth0.jwt.*
 import com.auth0.jwt.algorithms.*
 import com.password4j.*
-
+import java.nio.charset.StandardCharsets
 import java.security.SecureRandom
 import java.time.Duration
 import java.time.Instant
@@ -13,8 +13,6 @@ import java.util.UUID
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
 import zio.*
-
-import java.nio.charset.StandardCharsets
 
 class Authentication(config: AuthenticationConfig):
   def encryptPassword(password: String): Task[String] =
