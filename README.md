@@ -9,15 +9,21 @@ Use the following integrations for local testing only. First, run `docker-compos
 
 ### Mailpit
 
-To use Mailpit, add `docker/mailpit/cert.pem` to your JVM `cacerts` with the following command:
+To use Mailpit, run the following script to generate a self-signed TLS certificate and import it into your JVM `cacerts`:
+
+```bash
+docker/mailpit/generate-cert.sh [alias]
 ```
-keytool -cacerts -import -alias <some_descriptive_name> -file <path_to_cert.pem>
-```
+Optionally pass an alias for the JVM cacerts entry (default: `mailpit-local`):
 
 ### Stripe
 
 To setup local testing of the Stripe payments webhook, set `PAYMENT_PROVIDER_STRIPE_WEBHOOK_SECRET` in your `.env`
-to the value obtained by running `docker/stripe/webhook_secret.sh`.
+to the value obtained by running:
+
+```bash
+docker/stripe/webhook_secret.sh
+```
 
 ### Ollama
 
