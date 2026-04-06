@@ -15,5 +15,5 @@ object Version {
   lazy val zioJson     = "0.9.0"
   lazy val zioLogging  = "2.5.3"
   lazy val zioQuill    = "4.8.6"
-  lazy val zioTest     = "2.1.24"
+  lazy val zioTest     = "2.1.25"
 }
