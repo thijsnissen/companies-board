@@ -13,7 +13,7 @@ lazy val root =
       normalizedName := "companies-board",
       description    := "Adapted from ZIO Rite of Passage by Rock the JVM."
     )
-    .settings(Aliases.common)
+    .settings(Settings.common ++ Aliases.common)
     .aggregate(
       foundations,
       application,
