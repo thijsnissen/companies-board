@@ -4,7 +4,7 @@ object Version {
   lazy val flyway      = "12.1.1"
   lazy val jakartaMail = "2.1.5"
   lazy val javaJwt     = "4.5.1"
-  lazy val logback     = "1.5.33"
+  lazy val logback     = "1.5.34"
   lazy val password4j  = "1.8.4"
   lazy val postgresql  = "42.7.10"
   lazy val stripe      = "31.4.1"
