@@ -1,6 +1,6 @@
 import sbt.*
 
-object Dependencies {
+object Dependencies:
   lazy val foundations = Seq(
     "dev.zio"                     %% "zio"                      % Version.zio,
     "com.softwaremill.sttp.tapir" %% "tapir-zio-http-server"    % Version.tapir,
@@ -57,4 +57,3 @@ object Dependencies {
     "com.softwaremill.sttp.tapir" %% "tapir-swagger-ui-bundle"  % Version.tapir,
     "com.softwaremill.sttp.tapir" %% "tapir-json-zio"           % Version.tapir
   )
-}
