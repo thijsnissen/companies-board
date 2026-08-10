@@ -1,9 +1,6 @@
-Global / onChangedBuildSource  := ReloadOnSourceChanges
-ThisBuild / watchBeforeCommand := Watch.clearScreen
-
-ThisBuild / organization := "nl.thijsnissen"
-ThisBuild / version      := "0.1.0"
-ThisBuild / scalaVersion := "3.8.4"
+organization := "nl.thijsnissen"
+version      := Version.semver
+scalaVersion := Version.scala
 
 lazy val root =
   project
@@ -72,3 +69,7 @@ lazy val libHttp =
     .in(file("code/libs/http"))
     .settings(Settings.common)
     .settings(libraryDependencies ++= Dependencies.libHttp)
+
+watchBeforeCommand := Watch.clearScreen
+
+Global / onChangedBuildSource := ReloadOnSourceChanges
