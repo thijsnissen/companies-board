@@ -1,7 +1,7 @@
 import sbt.*
 import sbt.Keys.*
 
-object Settings {
+object Settings:
   lazy val common = Seq(
     scalacOptions ++= Seq(
       "-encoding",
@@ -19,11 +19,14 @@ object Settings {
       defaultImports
     ),
     Compile / run / connectInput := true,
-    ThisBuild / run / fork       := true,
-    ThisBuild / run / javaOptions ++= Seq(
+    run / fork                   := true,
+    run / javaOptions ++= Seq(
+      "-Xmx4G",
+      "-Xss1G",
       "-XX:+HeapDumpOnOutOfMemoryError",
       "-XX:+UseG1GC"
-    )
+    ),
+    libraryDependencySchemes += "dev.zio" %% "zio-json" % VersionScheme.Always
   )
 
   private lazy val defaultImports =
@@ -34,4 +37,3 @@ object Settings {
       "scala.annotation",
       "scala.util.chaining"
     ).mkString("-Yimports:", ",", "")
-}
