@@ -8,20 +8,21 @@ object QuillDemo extends ZIOAppDefault:
   val program: ZIO[JobRepository, Throwable, Unit] =
     for
       repo <- ZIO.service[JobRepository]
+      _    <- repo.create(
+        Job(
+          id = -1,
+          title = "Software Engineer",
+          url = "rockthejvm.com",
+          company = "Rock the JVM"
+        )
+      )
       _ <- repo.create(
         Job(
-        id = -1,
-        title = "Software Engineer",
-        url = "rockthejvm.com",
-        company = "Rock the JVM"
-      )
-      )
-      _ <- repo.create(
-        Job(
-        id = -1,
-        title = "Instructor",
-        url = "rockthejvm.com",
-        company = "Rock the JVM")
+          id = -1,
+          title = "Instructor",
+          url = "rockthejvm.com",
+          company = "Rock the JVM"
+        )
       )
     yield ()
 
@@ -99,6 +100,4 @@ class JobRepositoryLive(quill: Quill.Postgres[SnakeCase]) extends JobRepository:
 object JobRepositoryLive:
   val layer: ZLayer[Quill.Postgres[SnakeCase], Nothing, JobRepository] =
     ZLayer:
-      ZIO.serviceWith[Quill.Postgres[SnakeCase]](
-        quill => JobRepositoryLive(quill)
-      )
+      ZIO.serviceWith[Quill.Postgres[SnakeCase]](quill => JobRepositoryLive(quill))

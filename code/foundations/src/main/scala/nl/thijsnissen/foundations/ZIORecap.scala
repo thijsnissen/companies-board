@@ -156,7 +156,7 @@ object ZIORecap extends ZIOAppDefault:
     Console.printLine("Rock the JVM!") *>
       program.provide(
         ConnectionPool.live(10), // build me ConnectionPool
-        UserDatabase.live, // build me a UserDatabase, using the ConnectionPool
-        EmailService.live, // build me an EmailService
-        UserSubscription.live // build me a UserSubscription, using the EmailService and the UserDatabase
+        UserDatabase.live,       // build me a UserDatabase, using the ConnectionPool
+        EmailService.live,       // build me an EmailService
+        UserSubscription.live    // build me a UserSubscription, using the EmailService and the UserDatabase
       )

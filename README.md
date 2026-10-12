@@ -1,7 +1,7 @@
 # Companies Board
 
 Adapted from [ZIO Rite of Passage](https://rockthejvm.com/p/zio-rite-of-passage) using [Ports and Adapters](https://alistair.cockburn.us/hexagonal-architecture/) architecture.
-Common functionality, like [authentication](code/libs/auth/src/main/scala), the [HTTP server](code/libs/http/src/main/scala), the [database-](code/libs/db/src/main/scala) and the [E-mail client](code/libs/email/src/main/scala), is
+Common functionality, like [authentication](code/libs/auth/src/main/scala/nl/thijsnissen/auth), the [HTTP server](code/libs/http/src/main/scala/nl/thijsnissen/http), the [database-](code/libs/db/src/main/scala/nl/thijsnissen/db) and the [E-mail client](code/libs/email/src/main/scala/nl/thijsnissen/email), is
 moved to separate library modules.
 
 ## Running Locally

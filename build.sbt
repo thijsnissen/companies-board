@@ -10,8 +10,16 @@ lazy val root =
       normalizedName := "companies-board",
       description    := "Adapted from ZIO Rite of Passage by Rock the JVM."
     )
-    .settings(Aliases.common)
-    .aggregate(application, integration)
+    .settings(Settings.common ++ Aliases.common)
+    .aggregate(
+      foundations,
+      application,
+      integration,
+      libAuth,
+      libDb,
+      libEmail,
+      libHttp
+    )
 
 lazy val foundations =
   project
@@ -24,8 +32,7 @@ lazy val application =
     .in(file("code/application"))
     .enablePlugins(JibPlugin)
     .settings(Settings.common)
-    .settings(libraryDependencies ++=
-      Dependencies.application ++ Dependencies.test)
+    .settings(libraryDependencies ++= Dependencies.application ++ Dependencies.test)
     .dependsOn(server)
 
 lazy val server: Project =
@@ -50,19 +57,19 @@ lazy val libAuth =
   project
     .in(file("code/libs/auth"))
     .settings(Settings.common)
-    .settings(libraryDependencies ++= Dependencies.libAuth)
+    .settings(libraryDependencies ++= Dependencies.libAuth ++ Dependencies.test)
 
 lazy val libDb =
   project
     .in(file("code/libs/db"))
     .settings(Settings.common)
-    .settings(libraryDependencies ++= Dependencies.libDb)
+    .settings(libraryDependencies ++= Dependencies.libDb ++ Dependencies.test)
 
 lazy val libEmail =
   project
     .in(file("code/libs/email"))
     .settings(Settings.common)
-    .settings(libraryDependencies ++= Dependencies.libEmail)
+    .settings(libraryDependencies ++= Dependencies.libEmail ++ Dependencies.test)
 
 lazy val libHttp =
   project
